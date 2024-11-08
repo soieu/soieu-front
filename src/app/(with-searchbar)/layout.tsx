@@ -1,4 +1,5 @@
 import SearchBar from "../../components/search-bar";
+import Link from "next/link";
 
 export default function Home({
   children,
@@ -9,6 +10,7 @@ export default function Home({
     <div>
       <div>{children}</div>
       <SearchBar />
+      <Link href="/board/create">Create Board</Link>
     </div>
   );
 }
