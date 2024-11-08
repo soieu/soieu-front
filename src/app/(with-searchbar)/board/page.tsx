@@ -2,7 +2,7 @@ import BoardPreviewColumn from "@/components/board-preview-column";
 
 export default async function Home() {
   const boardsPreview = await fetch(
-    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/api/boards`
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/api/board`
   ).then((res) => res.json());
   return (
     <div>
