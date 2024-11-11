@@ -18,7 +18,6 @@ export default async function Page({
     }
 
     const data = await response.json();
-    console.log("응답 데이터:", data); // 응답 데이터를 출력
 
     return (
       <div>
