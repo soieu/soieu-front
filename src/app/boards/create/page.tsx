@@ -9,8 +9,10 @@ export default function Page() {
 
   const createBoard = async () => {
     try {
+      console.log("게시글 생성 요청 시작:", { title, content });
+
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_SERVER_URL}/api/board`,
+        `${process.env.NEXT_PUBLIC_API_SERVER_URL}/api/boards`,
         {
           method: "POST",
           headers: {
@@ -20,15 +22,19 @@ export default function Page() {
         }
       );
 
+      console.log("응답 상태 코드:", response.status);
+      console.log("응답 상태 텍스트:", response.statusText);
+
       if (!response.ok) {
-        throw new Error("게시글 생성에 실패했습니다.");
+        throw new Error(`Error ${response.status}: ${response.statusText}`);
       }
 
       const result = await response.json();
       console.log("게시글 생성 성공:", result);
-      router.back();
+
+      router.push(`/boards/${result.id}`);
     } catch (error) {
-      console.error("게시글 생성 중 오류 발생:", error);
+      console.error("API 요청 중 오류 발생:", error);
     }
   };
 

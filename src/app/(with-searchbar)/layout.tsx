@@ -10,7 +10,7 @@ export default function Home({
     <div>
       <div>{children}</div>
       <SearchBar />
-      <Link href="/board/create">Create Board</Link>
+      <Link href="/boards/create">Create Board</Link>
     </div>
   );
 }

@@ -7,7 +7,7 @@ export default async function Page({
 }) {
   const { query } = await searchParams;
   const boardsPreview = await fetch(
-    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/api/board/search?query=${query}`
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/api/boards/search?query=${query}`
   ).then((res) => res.json());
   return (
     <div>

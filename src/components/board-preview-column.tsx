@@ -9,7 +9,7 @@ export default function BoardPreviewColumn({
     <div className="flex flex-row justify-between">
       <div className="board-preview-column-title">{id}</div>
       <div className="board-preview-column-title">
-        <Link href={`/board/${id}`}>{title}</Link>
+        <Link href={`/boards/${id}`}>{title}</Link>
       </div>
       <div className="board-preview-column-date">{createdDate}</div>
     </div>
