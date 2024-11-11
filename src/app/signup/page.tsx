@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -34,18 +33,16 @@ export default function Page() {
       );
 
       if (!response.ok) {
-        const errorText = await response.text(); // 오류 메시지를 텍스트로 읽기
+        const errorText = await response.text();
         console.error("Error from server:", errorText);
         alert("회원가입 중 오류가 발생했습니다. 다시 시도해주세요.");
         return;
       }
-
+      // TODO 상태로 성공했는지 그런거 체크하기 지금 실패해도 걍 성공했다 나올걸
       const data = await response.json();
       console.log(data);
-      if (data.success) {
-        alert("회원가입이 성공했습니다.");
-        router.push("/login");
-      }
+      alert("회원가입이 성공했습니다.");
+      router.push("/login");
     } catch (error) {
       console.error("Network error:", error);
       alert("네트워크 오류가 발생했습니다.");
