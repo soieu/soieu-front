@@ -1,19 +1,19 @@
-"use client"; // 클라이언트 컴포넌트로 설정
+"use client";
 
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation"; // useSearchParams 훅을 가져옵니다
+import { useSearchParams } from "next/navigation";
 import BoardPreviewColumn from "@/components/board-preview-column";
 
 export default function Page() {
   const searchParams = useSearchParams();
-  const page = searchParams.get("page") || "1"; // 기본 페이지 값을 설정합니다
+  const page = searchParams.get("page") || "1";
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const jwtToken = localStorage.getItem("jwt"); // 클라이언트 측에서만 접근 가능
+        const jwtToken = localStorage.getItem("jwt");
 
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_API_SERVER_URL}/api/boards?page=${page}`,
