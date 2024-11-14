@@ -1,5 +1,7 @@
+// app/layout.tsx
 import type { Metadata } from "next";
 import "./globals.css";
+import BodyWrapper from "@/components/body-wrapper";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,7 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`antialiased`}>{children}</body>
+      <body className="antialiased  min-h-screen w-full flex justify-center items-center">
+        <BodyWrapper>{children}</BodyWrapper>
+      </body>
     </html>
   );
 }

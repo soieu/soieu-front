@@ -1,52 +1,37 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { cookies } from "next/headers";
 import BoardPreviewColumn from "@/components/board-preview-column";
+import { headers } from "next/headers";
 
-export default function Page() {
-  const searchParams = useSearchParams();
-  const page = searchParams.get("page") || "1";
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
+export default async function Page() {
+  const cookieStore = await cookies();
+  const jwtToken = cookieStore.get("jwt")?.value;
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const jwtToken = localStorage.getItem("jwt");
+  // if (!jwtToken) {
+  //   console.error("No JWT token found in cookies");
+  //   return <div>Error: No authorization token</div>;
+  // }
 
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_SERVER_URL}/api/boards?page=${page}`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${jwtToken}`,
-            },
-          }
-        );
+  // headers() 함수 호출에 await 추가
+  const referer = (await headers()).get("referer") || "";
+  const url = new URL(referer);
+  const page = url.searchParams.get("page") || "1"; // 기본값을 "1"로 설정
 
-        if (!response.ok) {
-          throw new Error(`Error ${response.status}: ${response.statusText}`);
-        }
-
-        const result = await response.json();
-        setData(result);
-      } catch (err) {
-        console.error("API 요청 중 오류 발생:", err);
-        setError("게시글을 불러오는 중 오류가 발생했습니다.");
-      }
-    };
-
-    fetchData();
-  }, [page]);
-
-  if (error) {
-    return <div>{error}</div>;
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/api/boards?page=${page}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Bearer ${jwtToken}`,
+      },
+    }
+  );
+  console.log(response);
+  if (!response.ok) {
+    console.error("Failed to fetch data");
+    return <div>Error loading boards</div>;
   }
 
-  if (!data) {
-    return <div>로딩 중...</div>;
-  }
+  const data = await response.json();
 
   return (
     <div>
