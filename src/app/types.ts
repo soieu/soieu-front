@@ -1,10 +1,10 @@
-type BoardPreviewData = {
+export type BoardPreviewData = {
   id: number;
   title: string;
   createdDate: string;
 };
 
-type BoardData = {
+export type BoardData = {
   id: number;
   title: string;
   createdDate: string;

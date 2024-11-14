@@ -1,3 +1,4 @@
+import { BoardPreviewData } from "@/app/types";
 import Link from "next/link";
 
 export default function BoardPreviewColumn({

@@ -1,3 +1,4 @@
+import { BoardPreviewData } from "@/app/types";
 import BoardPreviewColumn from "@/components/board-preview-column";
 
 export default async function Page({
@@ -11,7 +12,7 @@ export default async function Page({
   ).then((res) => res.json());
   return (
     <div>
-      {boardsPreview.map((boardPreview, i) => (
+      {boardsPreview.map((boardPreview: BoardPreviewData, i: number) => (
         <BoardPreviewColumn key={i} {...boardPreview}></BoardPreviewColumn>
       ))}
     </div>

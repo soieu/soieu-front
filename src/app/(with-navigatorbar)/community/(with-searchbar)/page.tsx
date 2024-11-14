@@ -1,10 +1,11 @@
-import { cookies } from "next/headers";
+// import { cookies } from "next/headers";
+import { BoardPreviewData } from "@/app/types";
 import BoardPreviewColumn from "@/components/board-preview-column";
 import { headers } from "next/headers";
 
 export default async function Page() {
-  const cookieStore = await cookies();
-  const jwtToken = cookieStore.get("jwt")?.value;
+  // const cookieStore = await cookies();
+  // const jwtToken = cookieStore.get("jwt")?.value;
 
   // if (!jwtToken) {
   //   console.error("No JWT token found in cookies");
@@ -35,7 +36,7 @@ export default async function Page() {
 
   return (
     <div>
-      {data.map((boardPreview, i) => (
+      {data.map((boardPreview: BoardPreviewData, i: number) => (
         <BoardPreviewColumn key={i} {...boardPreview} />
       ))}
     </div>
