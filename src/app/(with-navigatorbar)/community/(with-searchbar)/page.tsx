@@ -13,6 +13,7 @@ export default async function Page() {
   // }
 
   // headers() 함수 호출에 await 추가
+  console.log("test");
   const referer = (await headers()).get("referer") || "";
   const url = new URL(referer);
   const page = url.searchParams.get("page") || "1"; // 기본값을 "1"로 설정
