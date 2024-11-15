@@ -9,7 +9,9 @@ export default function Page() {
   const fetchLatestNews = async () => {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:8080/latestNews"); // API 엔드포인트
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_SERVER_URL}/latestNews`
+      ); // API 엔드포인트
       if (!response.ok) {
         throw new Error("Failed to fetch the latest news");
       }
