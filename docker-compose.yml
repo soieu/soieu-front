@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  next-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://43.202.20.143:8080 # 백엔드 API URL 설정
+    volumes:
+      - .:/app
+    restart: always
+    command: "npm run start"
